@@ -1,0 +1,13 @@
+services:
+  email-bridge-server:
+    build: .
+    container_name: email-bridge-server
+    restart: always
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+    # Optional: Ggf. Netzwerk für Stalwart verknüpfen (falls Stalwart auf dem gleichen Mail-VPS im Docker läuft)
+    # network_mode: "host" oder custom networks
