@@ -1,7 +1,7 @@
 {
   "name": "email-bridge-client",
   "version": "1.0.0",
-  "description": "Dockerized Node.js Email Bridge Client for openPOS with automatic retry and IMAP proxying",
+  "description": "Dockerized Node.js Email Bridge Client with automatic retry and IMAP proxying",
   "main": "client.js",
   "scripts": {
     "start": "node client.js",
@@ -18,10 +18,9 @@
     "email",
     "bridge",
     "client",
-    "openpos",
     "docker",
     "microservice"
   ],
-  "author": "openPOS Team",
+  "author": "Arndt Handschuh",
   "license": "MIT"
 }

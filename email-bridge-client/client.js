@@ -13,14 +13,14 @@ const MAX_RETRIES = parseInt(process.env.MAX_RETRIES || '3', 10);
 app.use(cors());
 app.use(express.json({ limit: '15mb' }));
 
-// Optionale lokale Authentifizierung (für openPOS internes Netzwerk)
+// Optionale lokale Authentifizierung (für internes Netzwerk / App Stack)
 const localAuth = (req, res, next) => {
   const localKey = process.env.LOCAL_API_KEY;
   if (!localKey) return next();
 
   const apiKey = req.headers['x-api-key'] || (req.headers.authorization ? req.headers.authorization.replace('Bearer ', '') : null);
   if (apiKey !== localKey) {
-    return res.status(401).json({ error: 'Nicht autorisiert im lokalen openPOS Netzwerk.' });
+    return res.status(401).json({ error: 'Nicht autorisiert im internen Netzwerk.' });
   }
   next();
 };
@@ -65,7 +65,7 @@ app.get('/health', async (req, res) => {
   res.json({
     status: 'OK',
     timestamp: new Date().toISOString(),
-    service: 'email-bridge-client (openPOS)',
+    service: 'email-bridge-client',
     remoteBridge: remoteStatus,
   });
 });
@@ -85,7 +85,7 @@ const sendSchema = z.object({
 
 /**
  * @route POST /send (sowie Alias /api/email/send)
- * @desc Nimmt E-Mail-Aufträge aus openPOS entgegen und leitet sie mit Retry an die Bridge weiter
+ * @desc Nimmt E-Mail-Aufträge entgegen und leitet sie mit Retry an die Bridge weiter
  */
 const sendHandler = async (req, res) => {
   try {

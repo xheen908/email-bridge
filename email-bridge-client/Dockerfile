@@ -11,7 +11,7 @@ RUN npm ci --only=production
 # Anwendungs-Code kopieren
 COPY . .
 
-# Port im openPOS Docker-Netzwerk freigeben
+# Port freigeben
 EXPOSE 3000
 
 # Client-Service starten

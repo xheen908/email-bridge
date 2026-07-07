@@ -23,9 +23,8 @@
     "bridge",
     "stalwart",
     "smtp",
-    "imap",
-    "openpos"
+    "imap"
   ],
-  "author": "openPOS Team",
+  "author": "Arndt Handschuh",
   "license": "MIT"
 }
