@@ -11,3 +11,11 @@ services:
       - NODE_ENV=production
     # Optional: Ggf. Netzwerk für Stalwart verknüpfen (falls Stalwart auf dem gleichen Mail-VPS im Docker läuft)
     # network_mode: "host" oder custom networks
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared-tunnel
+    restart: always
+    command: tunnel run
+    environment:
+      - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
