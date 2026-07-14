@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 
 # Abhängigkeiten kopieren und installieren
 COPY package*.json ./
-RUN npm ci --only=production
+RUN npm install --omit=dev
 
 # Anwendungs-Code kopieren
 COPY . .
@@ -16,3 +16,4 @@ EXPOSE 3000
 
 # Server-Skript starten
 CMD [ "npm", "start" ]
+
