@@ -54,9 +54,10 @@ const sendEmailSchema = z.object({
   attachments: z.array(z.object({
     filename: z.string(),
     content: z.string().optional(), // Base64 kodierter String oder Text
+    encoding: z.string().optional(), // z.B. 'base64'
     path: z.string().optional(),
     contentType: z.string().optional(),
-  })).optional(),
+  }).passthrough()).optional(),
   appendToSent: z.boolean().optional().default(true),
 }).refine(data => data.text || data.html, {
   message: 'Es muss entweder ein Text- (text) oder ein HTML-Inhalt (html) angegeben werden.',
